@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutation Observer</title>
+</head>
+<body>
+<div id="target">
+    <p>Это параграф</p>
+</div>
+
+<button id="addElement">Добавить элемент</button>
+<button id="deleteElement">Удалить элемент</button>
+
+<script>
+    // Выбераем целевой узел(ноду), за который необходимо следить
+    const targetNode = document.getElementById('target');
+
+    // Создаем новый инстанс Mutation Observer
+    const observer = new MutationObserver((mutationsList) => {
+        console.log(mutationsList)
+    });
+
+    // Настраиваем наблюдателя на отслеживание изменений
+    const config = {
+        attributes: true,           // Следите за изменениями в атрибутах
+        childList: true,            // Следите за изменениями в дочерних элементах
+        subtree: true,              // Следить за изменениями во всем поддереве
+        attributeOldValue: true     // Запись старых атрибутов
+    };
+
+    // Запуск наблюдения за целевыми нодами с указанной конфигурацией
+    observer.observe(targetNode, config);
+
+    // Добавление нового элемента к отслеживаемой цели
+    const addButton = document.getElementById('addElement');
+    addButton.addEventListener('click', () => {
+
+        const newElement = document.createElement('p');
+        newElement.textContent = 'Новый добавленный элемент.';
+        targetNode.appendChild(newElement);
+        /*console.log('after change')
+        Promise.resolve().then(()=>{console.log('promise')})
+
+        setTimeout(()=> console.log("timer"), 0)
+*/
+
+    });
+
+    const deleteButton = document.getElementById('deleteElement');
+    deleteButton.addEventListener('click', () => {
+        const lastChild = targetNode.lastChild;
+        if (lastChild) {
+            targetNode.removeChild(lastChild);
+        }
+    });
+</script>
+</body>
+</html>

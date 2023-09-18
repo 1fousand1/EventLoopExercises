@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>queueMicrotask</title>
+</head>
+<body>
+<script>
+    console.log("Ready")
+
+    function myAsyncFunction() {
+        console.log("Start");
+    }
+
+    queueMicrotask(myAsyncFunction);
+
+    setTimeout(()=>(
+        console.log("i am champion")
+    ),3000)
+
+    console.log("Finish");
+
+</script>
+</body>
+</html>
