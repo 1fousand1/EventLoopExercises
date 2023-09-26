@@ -6,12 +6,12 @@
 </head>
 <body>
 <script>
+
     console.log("Ready")
 
     function myAsyncFunction() {
         console.log("Start");
     }
-
     queueMicrotask(myAsyncFunction);
 
     setTimeout(()=>(
